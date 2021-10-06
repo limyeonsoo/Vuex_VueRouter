@@ -6,6 +6,7 @@
 </template>
 <script>
 import FrogWorld from '../components/FrogWorld';
+import {mapState} from 'vuex';
 
 export default {
   name: 'FrogPage',
@@ -19,31 +20,27 @@ export default {
         { name: 'clover', message: 'bye'},
         { name: 'kebab', message: 'foo-bar'},
       ],
-      frogList:[
-        {age:1, name:'red'},
-        {age:2, name:'yellow'},
-        {age:3, name:'blue'},
-        {age:4, name:'green'},
-      ]
     }
   },
   components:{
     FrogWorld
   },
+  computed: mapState({
+    frogList: state => state.frogList,
+  }),
   methods: {
-    onClickImage(){
-      this.appList.push({name:'camel', message:'fooBar'})
-    },
     onClickFrog(number){
-      console.log(this.frogList[number]);
-      this.frogList.push({age: this.frogList.length+1, name: this.frogList[number].name});
-      console.log(this.frogList);
+      //this.frogList.push({age: this.frogList.length+1, name: this.frogList[number].name});
+      this.$store.commit('generate', {
+        age: this.frogList.length+1,
+        name: this.frogList[number].name
+      });
+      console.log(number);
+      // this.$store.commit('generate', 10, 'blue');
+      // let currentState = this.$store.state.frogList;
+      // console.log(currentState);
+      // this.$store.state.generate(currentState+1, currentState[number].name)
     },
-    goBack(){
-      window.history.length > 1
-          ? this.$router.go(-1)
-          : this.$router.push('/')
-    }
   }
 }
 </script>

@@ -5,10 +5,13 @@
   </div>
 </template>
 <script>
+import store from './store/frogStore';
 
 export default {
   name: 'App',
+  store
 }
+
 </script>
 
 <style>
