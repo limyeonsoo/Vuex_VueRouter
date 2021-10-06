@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import HelloPage from "./pages/HelloPage";
-import FrogPage from "./pages/FrogPage";
+import HelloPage from "../pages/HelloPage";
+import FrogPage from "../pages/FrogPage";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
