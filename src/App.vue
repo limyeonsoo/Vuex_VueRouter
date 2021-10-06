@@ -9,9 +9,12 @@ import store from './store/frogStore';
 
 export default {
   name: 'App',
-  store
-}
+  store,
 
+}
+window.onbeforeunload = function(){
+  localStorage.setItem('frogList', JSON.stringify(store.state.frogList));
+}
 </script>
 
 <style>

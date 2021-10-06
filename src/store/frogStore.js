@@ -5,20 +5,36 @@ Vue.use(Vuex);
 
 const frogStore = new Vuex.Store({
     state: {
-        frogList:[
-            {age:1, name:'red'},
-            {age:2, name:'yellow'},
-            {age:3, name:'blue'},
-            {age:4, name:'green'},
-        ],
+        frogList:[],
     },
     mutations:{
+        init(state){
+            console.log('init');
+            state.frogList = [
+                {age:1, name:'red'},
+                {age:2, name:'yellow'},
+                {age:3, name:'blue'},
+                {age:4, name:'green'},
+            ]
+        },
+        load(state, pre){
+            console.log('load');
+            pre.map((each) => {
+                state.frogList.push(each);
+            })
+        },
         generate(state, { age, name }){
-            console.log(name);
             state.frogList.push({age: age, name: name});
         },
         remove(){
             console.log('remove');
+        },
+    },
+    getters:{
+        getSameColor(state){
+            return function (color) {
+                return state.frogList.filter(frog => frog.name === color);
+            }
         }
     }
 })

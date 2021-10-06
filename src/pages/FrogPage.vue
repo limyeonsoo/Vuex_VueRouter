@@ -30,17 +30,21 @@ export default {
   }),
   methods: {
     onClickFrog(number){
-      //this.frogList.push({age: this.frogList.length+1, name: this.frogList[number].name});
       this.$store.commit('generate', {
         age: this.frogList.length+1,
         name: this.frogList[number].name
       });
-      console.log(number);
-      // this.$store.commit('generate', 10, 'blue');
-      // let currentState = this.$store.state.frogList;
-      // console.log(currentState);
-      // this.$store.state.generate(currentState+1, currentState[number].name)
     },
+  },
+  beforeMount(){
+    let preData = JSON.parse(localStorage.getItem('frogList'));
+    console.log(preData);
+    if(preData.length === 0 || preData === null) {
+      console.log('go init');
+      this.$store.commit('init');
+    } else{
+      this.$store.commit('load', preData);
+    }
   }
 }
 </script>
