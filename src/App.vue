@@ -10,10 +10,17 @@ import store from './store/frogStore';
 export default {
   name: 'App',
   store,
-
-}
-window.onbeforeunload = function(){
-  localStorage.setItem('frogList', JSON.stringify(store.state.frogList));
+  beforeMount(){
+    let preData = JSON.parse(sessionStorage.getItem('frogList'));
+    console.log(preData);
+    if(preData === null){
+      this.$store.commit('init');
+    } else if(preData.length === 0) {
+      this.$store.commit('init');
+    } else{
+      this.$store.commit('load', preData);
+    }
+  }
 }
 </script>
 

@@ -7,6 +7,7 @@
 <script>
 import FrogWorld from '../components/FrogWorld';
 import {mapState} from 'vuex';
+import store from "../store/frogStore";
 
 export default {
   name: 'FrogPage',
@@ -36,16 +37,10 @@ export default {
       });
     },
   },
-  beforeMount(){
-    let preData = JSON.parse(localStorage.getItem('frogList'));
-    console.log(preData);
-    if(preData.length === 0 || preData === null) {
-      console.log('go init');
-      this.$store.commit('init');
-    } else{
-      this.$store.commit('load', preData);
-    }
-  }
+  beforeRouteLeave(to, from, next){
+    console.log(to, from, next);
+    sessionStorage.setItem('frogList', JSON.stringify(store.state.frogList));
+  },
 }
 </script>
 

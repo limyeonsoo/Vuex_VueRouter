@@ -18,7 +18,6 @@ const frogStore = new Vuex.Store({
             ]
         },
         load(state, pre){
-            console.log('load');
             pre.map((each) => {
                 state.frogList.push(each);
             })
